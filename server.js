@@ -19,5 +19,5 @@ app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
 );
 
-app.use("/user", userRoute);
-app.use('/admin',adminRoute)
+app.use("/api/user", userRoute);
+app.use('/api/admin',adminRoute)

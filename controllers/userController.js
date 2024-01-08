@@ -16,7 +16,7 @@ export const doSignup = async (req, res) => {
       const newUser = userModel({ ...req.body, password });
       newUser.save().then((data) => {
         const accessToken = jwt.sign(
-          { id: user._id },
+          { id: data._id },
           process.env.JWT_SECRET_KEY,
           { expiresIn: "7d" }
         );

@@ -11,10 +11,11 @@ import {
   deleteCategory,
   updateCategory,
 } from "../controllers/categoryController.js";
+import { adminLogin, changeUserBlockStatus, getAllUsers } from "../controllers/adminController.js";
 const router = express.Router();
 
 // admin login
-
+router.post("/login", adminLogin);
 
 // get all categories
 router.get("/categories", categories);
@@ -39,5 +40,11 @@ router.patch("/update-product", updateProduct);
 
 // delete product
 router.delete("/delete-product", deleteProduct);
+
+// get all users
+router.get("/get-users", getAllUsers);
+
+// change user block status
+router.post('/change-user-status',changeUserBlockStatus)
 
 export default router;
