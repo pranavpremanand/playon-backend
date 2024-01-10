@@ -10,22 +10,25 @@ export const addCategory = async (req, res) => {
       res
         .status(200)
         .json({ success: false, message: "Category already exists" });
-    }
-    const newCategory = new categoryModel(req.body);
-    newCategory.save().then((data) => {
-      res.status(201).json({
-        success: true,
-        message: "Category created successfully",
-        data,
+    } else {
+      const newCategory = new categoryModel(req.body);
+      newCategory.save().then((data) => {
+        res.status(201).json({
+          success: true,
+          message: "Category created successfully",
+          data,
+        });
       });
-    });
+    }
   } catch (err) {
+    console.log(err, "ERRORRRRR");
     res.status(500).json(err);
   }
 };
 
 // get all categories
 export const categories = async (req, res) => {
+  console.log('hay')
   try {
     const data = await categoryModel.find();
     res
