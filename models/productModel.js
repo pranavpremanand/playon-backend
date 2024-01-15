@@ -10,6 +10,7 @@ const productSchema = mongoose.Schema(
     },
     description: { type: String, required: true },
     images: { type: Array, required: true },
+    isDeleted: { type: Boolean, required: true, default: false },
   },
   { timestamps: true }
 );

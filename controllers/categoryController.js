@@ -28,7 +28,6 @@ export const addCategory = async (req, res) => {
 
 // get all categories
 export const categories = async (req, res) => {
-  console.log('hay')
   try {
     const data = await categoryModel.find();
     res
@@ -60,11 +59,24 @@ export const updateCategory = async (req, res) => {
 // delete category
 export const deleteCategory = async (req, res) => {
   try {
-    await productModel.delete({ category: req.params.id });
-    await categoryModel.deleteOne({ _id: req.params.id });
-    res
-      .status(200)
-      .json({ success: true, message: "Category deleted successfully" });
+    const productsExist = await productModel.findOne({
+      category: req.params.id,
+    });
+    if (productsExist) {
+      res.status(200).json({
+        success: false,
+        message:
+          "Products exist in this category\n Category cannot be deleted",
+      });
+    } else {
+      await categoryModel.updateOne(
+        { _id: req.params.id },
+        { isDeleted: true }
+      );
+      res
+        .status(200)
+        .json({ success: true, message: "Category deleted successfully" });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
