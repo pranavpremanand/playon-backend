@@ -58,7 +58,7 @@ export const addProduct = async (req, res) => {
 // get all products
 export const getAllProducts = async (req, res) => {
   try {
-    const data = await productModel.find();
+    const data = await productModel.find({ isDeleted: false });
     res
       .status(200)
       .json({ success: true, message: "Data fetched successfully", data });
