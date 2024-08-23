@@ -29,7 +29,7 @@ export const doSignup = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
   }
 };
 
@@ -68,6 +68,36 @@ export const doLogin = async (req, res) => {
         });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
+  }
+};
+
+
+
+// get all users data
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({ isAdmin: false });
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({message:err.message});
+  }
+};
+
+// do user block or unblock
+export const changeUserBlockStatus = async (req, res) => {
+  try {
+    const { userId, currentStatus } = req.body;
+    await userModel.updateOne(
+      { _id: userId },
+      { isBlocked: !currentStatus }
+    );
+    res.status(200).json({
+      success: true,
+      message: `${!currentStatus ? "Blocked" : "Unblocked"} user successfully`,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({message:err.message});
   }
 };

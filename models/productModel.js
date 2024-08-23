@@ -11,6 +11,28 @@ const productSchema = mongoose.Schema(
     description: { type: String, required: true },
     images: { type: Array, required: true },
     isDeleted: { type: Boolean, required: true, default: false },
+    quantityAndPrice: {
+      xs: {
+        quantity: Number,
+        price: Number,
+      },
+      sm: {
+        quantity: Number,
+        price: Number,
+      },
+      md: {
+        quantity: Number,
+        price: Number,
+      },
+      lg: {
+        quantity: Number,
+        price: Number,
+      },
+      xl: {
+        quantity: Number,
+        price: Number,
+      },
+    },
   },
   { timestamps: true }
 );

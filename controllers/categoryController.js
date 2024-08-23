@@ -21,7 +21,7 @@ export const addCategory = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
   }
 };
 
@@ -33,7 +33,7 @@ export const categories = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Data fetched successfully", data });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
   }
 };
 
@@ -51,7 +51,7 @@ export const updateCategory = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
   }
 };
 
@@ -76,6 +76,6 @@ export const deleteCategory = async (req, res) => {
         .json({ success: true, message: "Category deleted successfully" });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({message:err.message});
   }
 };
